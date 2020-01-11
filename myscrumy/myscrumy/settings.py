@@ -86,7 +86,7 @@ DATABASES = {
          'NAME': 'Scrum',
          'USER': 'root',
          'PASSWORD': '',
-        #  'HOST': '',
+         'HOST': '/var/run/mysqld/mysqld.sock',
     }
 }
 
