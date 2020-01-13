@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'myscrumy.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.mysql',
-         'NAME': 'linuxjobberdb',
+         'NAME': 'Scrum',
          'USER': 'Prometheus',
          'PASSWORD': 'popson1996',
-         'HOST': 'linuxjobberdb.cmaw2ablkfnc.us-east-2.rds.amazonaws.com',
+         'HOST': '18.191.54.16',
          'PORT': '3306',
     }
 }
