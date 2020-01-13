@@ -86,7 +86,7 @@ DATABASES = {
          'NAME': 'Scrum',
          'USER': 'olaoyejnr',
          'PASSWORD': 'popson1996',
-         'HOST': '18.191.54.16',
+         'HOST': '',
          'PORT': '3306',
     }
 }
