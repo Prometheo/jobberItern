@@ -84,7 +84,7 @@ DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.mysql',
          'NAME': 'Scrum',
-         'USER': 'Prometheus',
+         'USER': 'olaoyejnr',
          'PASSWORD': 'popson1996',
          'HOST': '18.191.54.16',
          'PORT': '3306',
