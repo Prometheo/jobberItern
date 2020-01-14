@@ -18,6 +18,8 @@ class ScrumyGoals(models.Model):
     goal_status = models.ForeignKey(GoalStatus, on_delete=models.PROTECT)
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='users')
 
+    def __str__(self):
+        return self.goal_name
 
 class ScrumyHistory(models.Model):
     moved_by = models.CharField(max_length=200)
@@ -26,3 +28,6 @@ class ScrumyHistory(models.Model):
     moved_to = models.CharField(max_length=200)
     time_of_action = models.TimeField()
     goal = models.ForeignKey(ScrumyGoals, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.created_by
