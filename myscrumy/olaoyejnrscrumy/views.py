@@ -31,7 +31,7 @@ def  add_goal(request):
 
 
 def home(request):
-    record_list = ScrumyGoals.objects.filter(goal_name = 'Keep Learning Django')
-    record = ', '.join([rec.goal_name for rec in record_list])
-    return HttpResponse(record)
-    
+    record_list = ScrumyGoals.objects.filter(goal_name = 'Learn Django')
+    context = {'goal_name': record_list[0].goal_name, 'goal_id': record_list[0].goal_id, 'user': record_list[0].user}
+
+    return render(request, 'olaoyejnrscrumy/home.html', context)
