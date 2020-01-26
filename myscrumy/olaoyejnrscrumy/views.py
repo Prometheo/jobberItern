@@ -9,9 +9,12 @@ def get_grading_parameters(request):
     return HttpResponse(new_message)
 
 def move_goal(request, goal_id):
-    target = ScrumyGoals.objects.get(goal_id=goal_id)
-    message = target.goal_name
-    return HttpResponse(message)
+    try:
+        target = ScrumyGoals.objects.get(goal_id=goal_id)
+    except Exception as e:
+        return render(request, 'olaoyejnrscrumy/exception.html', {'error': 'A record with that goal id does not exist'})
+    else:
+        return HttpResponse(target.goal_name)
 
 
 def gen_num():
@@ -31,7 +34,6 @@ def  add_goal(request):
 
 
 def home(request):
-    record_list = ScrumyGoals.objects.filter(goal_name = 'Learn Django')[0]
-    #context = {'goal_name': record_list[0].goal_name, 'goal_id': record_list[0].goal_id, 'user': record_list[0].user}
-    context = {'record_list': record_list}
+    record_list = ScrumyGoals.objects.get(goal_name = 'Learn Django')
+    context = {'goal_name': record_list.goal_name, 'goal_id': record_list.goal_id, 'user': record_list.user}
     return render(request, 'olaoyejnrscrumy/home.html', context)

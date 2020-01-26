@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title></title>
 </head>
 <body>
-    {% if record_list %}
     <table>
         <tr>
         <th>User</th>
@@ -17,14 +16,13 @@
         <th scope="col">Done Goals</th>
         </tr>
         <tr>
-        <td>{{record_list.user.first_name}}</td>
-        <td>{{record_list.goal_name}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{goal_name}}</td>
         </tr>
         <tr>
             <td></td>
-            <td>{{record_list.goal_id}}</td>
+            <td>{{goal_id}}</td>
         </tr>
         </table>
-        {% endif %}
 </body>
 </html>
