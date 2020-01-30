@@ -8,18 +8,27 @@
 </head>
 <body>
     <table>
-        <tr>
-                <th>User</th>
-                <th scope="col">Weekly Goals</th>
-                <br>
-                <th scope="col">Daily Goals</th>
-                <th scope="col">Verify Goals</th>
-                <th scope="col">Done Goals</th>
-        </tr>
-        <tr>
-        <td>{{user.first_name}}</td>
-        <td>{{goal_name}} - {{goal_id}}</td>
-        </tr>
+            <thead>
+                <tr>
+                        <th>User</th>
+                        <th scope="col">Weekly Goals</th>
+                        <th scope="col">Daily Goals</th>
+                        <th scope="col">Verify Goals</th>
+                        <th scope="col">Done Goals</th>
+                </tr>
+            </thead>
+                {% for usr in All_Users %}
+                <tr>
+                    <td>{{usr.username}}</td>
+                    {% for tasks in usr.users.all %}
+                    {% if tasks.goal_status.status_name == "Weekly Goal" %}
+                    <td>{{tasks.goal_name}}</td>
+                    {% elif tasks.goal_status.status_name == "Daily Goal" %}
+                    <td>{{tasks.goal_name}}</td>
+                    {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
         <tr>
             <td></td>
             <td></td>

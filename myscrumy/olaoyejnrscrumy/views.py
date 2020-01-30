@@ -34,6 +34,22 @@ def  add_goal(request):
 
 
 def home(request):
-    record_list = ScrumyGoals.objects.get(goal_name = 'Learn Django')
-    context = {'goal_name': record_list.goal_name, 'goal_id': record_list.goal_id, 'user': record_list.user}
-    return render(request, 'olaoyejnrscrumy/home.html', context)
+    # record_list = ScrumyGoals.objects.get(goal_name = 'Learn Django')
+    # context = {'goal_name': record_list.goal_name, 'goal_id': record_list.goal_id, 'user': record_list.user}
+    
+    All_Users = User.objects.all()
+    wikly_goals = GoalStatus.objects.get(status_name = "Weekly Goal")
+    All_weekly_goals = wikly_goals.scrumygoals_set.all()
+
+    daily_goals = GoalStatus.objects.get(status_name = "Daily Goal")
+    All_daily_goals = daily_goals.scrumygoals_set.all()
+
+    veri_goals = GoalStatus.objects.get(status_name = "Verify Goal")
+    All_veri_goals = veri_goals.scrumygoals_set.all()
+
+    done_goals = GoalStatus.objects.get(status_name = "Done Goal")
+    All_done_goals = done_goals.scrumygoals_set.all()
+
+    Contexts = {'All_Users': All_Users, 'All_weekly_goals': All_weekly_goals, "All_daily_goals": All_daily_goals, "All_veri_goals": All_veri_goals, "All_done_goals": All_done_goals}
+
+    return render(request, 'olaoyejnrscrumy/home.html', Contexts)
