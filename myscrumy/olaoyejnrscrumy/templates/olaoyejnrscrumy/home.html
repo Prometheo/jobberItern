@@ -7,6 +7,12 @@
     <title></title>
 </head>
 <body>
+    
+   <h3>
+        <a href="{% url 'olaoyejnrscrumy:AddGoal' %}"> Go To Add Goals Page </a>
+   </h3> 
+    <br>
+    <br>
     <table>
             <thead>
                 <tr>
@@ -18,21 +24,27 @@
                 </tr>
             </thead>
                 {% for usr in All_Users %}
-                <tr>
-                    <td>{{usr.username}}</td>
-                    {% for tasks in usr.users.all %}
-                    {% if tasks.goal_status.status_name == "Weekly Goal" %}
-                    <td>{{tasks.goal_name}}</td>
-                    {% elif tasks.goal_status.status_name == "Daily Goal" %}
-                    <td>{{tasks.goal_name}}</td>
-                    {% endif %}
-                    {% endfor %}
-                </tr>
+                    <tr>
+                        <td>{{usr.username}}</td>
+                        {% for tasks in usr.users.all %}
+                            {% if tasks in All_weekly_goals %}
+                                <td>{{tasks.goal_name}}</td>
+                            {% elif tasks in All_daily_goals %}
+                                <td>{{tasks.goal_name}}!</td>
+                            {% elif tasks in All_veri_goals %}
+                            <td>{{tasks.goal_name}}</td>
+                            {% elif tasks in All_done_goals %}
+                                <td>{{tasks.goal_name}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
                 {% endfor %}
+
         <tr>
             <td></td>
             <td></td>
         </tr>
         </table>
+        
 </body>
 </html>
