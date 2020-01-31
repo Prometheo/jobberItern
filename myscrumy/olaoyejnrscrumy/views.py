@@ -39,7 +39,7 @@ def  add_goal(request):
             scrumygoals = form.save(commit=False)
             scrumygoals.user = form.cleaned_data['user']
             scrumygoals.goal_name = form.cleaned_data['goal_name']
-            scrumygoals.goal_status = weekGoal
+            scrumygoals.goal_status = form.cleaned_data['goal_status']
             scrumygoals.goal_id = gen_num()
 
             #ScrumyGoals.objects.create(goal_name=form.cleaned_data['goal_name'], goal_id=gen_num(),goal_status= form.cleaned_data['goal_status'], user=form.cleaned_data['user'])
