@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import ScrumyGoals,ScrumyHistory,GoalStatus
 from random import randint
-from .models import SignupForm, CreateGoalForm
+from .forms import SignupForm, CreateGoalForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def get_grading_parameters(request):

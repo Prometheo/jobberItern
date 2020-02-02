@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.forms import ModelForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 # Create your models here.
 
@@ -34,13 +35,4 @@ class ScrumyHistory(models.Model):
         return self.created_by
 
 
-class SignupForm(ModelForm):
-    class Meta:
-        model = User
-        fields = ['first_name','last_name', 'email','username','password']
-
-
-class CreateGoalForm(ModelForm):
-    class Meta:
-        model = ScrumyGoals
-        fields = ['goal_name', 'user', 'goal_status']       
+       
