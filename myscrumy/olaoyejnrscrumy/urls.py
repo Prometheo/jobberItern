@@ -10,6 +10,8 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('register', views.register, name="registration"),
     path('addgoal', views.add_goal, name="AddGoal"),
+    #path('movegoal', views.move_goal, name="MoveGoal"),
+    path('success_message', views.success_page, name="success_message"),
 ]
 
 app_name = 'olaoyejnrscrumy'

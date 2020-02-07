@@ -1,50 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title></title>
-</head>
-<body>
-    
-   <h3>
-        <a href="{% url 'olaoyejnrscrumy:AddGoal' %}"> Go To Add Goals Page </a>
-   </h3> 
-    <br>
-    <br>
-    <table>
-            <thead>
-                <tr>
-                        <th>User</th>
-                        <th scope="col">Weekly Goals</th>
-                        <th scope="col">Daily Goals</th>
-                        <th scope="col">Verify Goals</th>
-                        <th scope="col">Done Goals</th>
-                </tr>
-            </thead>
-                {% for usr in All_Users %}
-                    <tr>
-                        <td>{{usr.username}}</td>
-                        {% for tasks in usr.users.all %}
-                            {% if tasks in All_weekly_goals %}
-                                <td>{{tasks.goal_name}}</td>
-                            {% elif tasks in All_daily_goals %}
-                                <td>{{tasks.goal_name}}!</td>
-                            {% elif tasks in All_veri_goals %}
-                            <td>{{tasks.goal_name}}</td>
-                            {% elif tasks in All_done_goals %}
-                                <td>{{tasks.goal_name}}</td>
-                            {% endif %}
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
+<style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;border-color:#aabcfe;}
+    .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#669;background-color:#e8edff;}
+    .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#aabcfe;color:#039;background-color:#b9c9fe;}
+    .tg .tg-hmp3{background-color:#D2E4FC;text-align:left;vertical-align:top}
+    .tg .tg-baqh{text-align:center;vertical-align:top}
+    .tg .tg-mb3i{background-color:#D2E4FC;text-align:right;vertical-align:top}
+    .tg .tg-lqy6{text-align:right;vertical-align:top}
+    .tg .tg-0lax{text-align:left;vertical-align:top}
+    </style>
 
+    <h3>
+        <a href="{% url 'olaoyejnrscrumy:AddGoal' %}"> Go To Add Goals Page </a>
+   </h3>
+   <h1>Logged in as: {{user}}</h1>
+
+   <h1>Designation: {{rank}}</h1>
+    <table class="tg">
+      <tr>
+        <th scope="col" class="tg-hmp3"><h2>User</h2></td>
+        <th scope="col" class="tg-hmp3"><h2>Weekly Goals</h2></td>
+        <th scope="col" class="tg-hmp3"><h2>Daily Goals</h2></td>
+        <th scope="col" class="tg-hmp3"><h2>Verify Goals</h2></td>
+        <th scope="col" class="tg-hmp3"><h2>Done Goals</h2></td>
+      </tr>
+      {% for user in All_Users %}
         <tr>
-            <td></td>
-            <td></td>
+            <td class="tg-0lax"><h2>{{user}}</h2></td>
+            <td class="tg-0lax">
+                {% for tasks in user.users.all %}
+                    {% if tasks in All_weekly_goals %}
+                    <h1>{{tasks.goal_name}} - ({{tasks.goal_id}})
+                        <br>
+                        {% if tasks.goal_name %}
+                            <a href="{% url 'olaoyejnrscrumy:move_goal' tasks.goal_id %}">
+                                <input type="button" value="move goal">
+                            </a>                
+                        {% endif %}
+                        <br>
+                    </h1>
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td class="tg-0lax">
+                {% for tasks in user.users.all %}
+                    {% if tasks in All_daily_goals %}
+                        <h1>{{tasks.goal_name}} - ({{tasks.goal_id}})
+                        <br>
+                        {% if tasks.goal_name %}                          
+                            <a href="{% url 'olaoyejnrscrumy:move_goal' tasks.goal_id %}">
+                                <input type="button" value="move goal">
+                            </a>
+                        {% endif %}
+                        <br>
+                    </h1>
+                    {% endif %}
+                {% endfor %}
+            </td>
+            <td class="tg-0lax">
+                    {% for tasks in user.users.all %}
+                        {% if tasks in All_veri_goals %}
+                        <h1>{{tasks.goal_name}} - ({{tasks.goal_id}})
+                            <br>
+                            {% if tasks.goal_name %}                          
+                                <a href="{% url 'olaoyejnrscrumy:move_goal' tasks.goal_id %}">
+                                    <input type="button" value="move goal">
+                                </a>
+                            {% endif %}
+                            <br>
+                            </h1>
+                        {% endif %}
+                    {% endfor %}
+            </td>
+            <td class="tg-0lax">
+                    {% for tasks in user.users.all %}
+                        {% if tasks in All_done_goals %}
+                        <h1>{{tasks.goal_name}} - ({{tasks.goal_id}})
+                            <br>
+                            {% if tasks.goal_name %}                          
+                                <a href="{% url 'olaoyejnrscrumy:move_goal' tasks.goal_id %}">
+                                    <input type="button" value="move goal">
+                                </a>
+                            {% endif %}
+                            <br>
+                        </h1>
+                        {% endif %}
+                    {% endfor %}
+            </td>
+                    <!-- <td class="tg-lqy6">{{tasks.goal_name}}</td>
+                    <td class="tg-lqy6">{{tasks.goal_name}}</td>
+-->
         </tr>
-        </table>
-        
-</body>
-</html>
+      {% endfor %}
+      <!-- <tr>
+        <td class="tg-hmp3">2</td>
+        <td class="tg-hmp3">Running</td>
+        <td class="tg-mb3i">15:30</td>
+        <td class="tg-mb3i">14:10</td>
+        <td class="tg-mb3i">15:45</td>
+      </tr>
+      <tr>
+        <td class="tg-0lax">3</td>
+        <td class="tg-0lax">Shooting</td>
+        <td class="tg-lqy6">70%</td>
+        <td class="tg-lqy6">55%</td>
+        <td class="tg-lqy6">90%</td>
+      </tr> -->
+    </table>
