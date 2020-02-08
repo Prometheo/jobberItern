@@ -45,10 +45,11 @@ def send_message(request):
     connections = ConnectionModel.objects.all()
     body = [body["message"]]
     data = {'message':body}
-    for cons in connections:
-        print(cons.connection_id)
-        _send_to_connection(cons.connection_id,data)
-        return JsonResponse({'message': 'successfully sent'}, status=200)
+    _send_to_connection(connections[0].connection_id,data)
+    # for cons in connections:
+    #     print(cons.connection_id)
+    #     _send_to_connection(cons.connection_id,data)
+    return JsonResponse({'message': 'successfully sent'}, status=200)
 
 
 
