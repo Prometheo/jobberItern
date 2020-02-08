@@ -33,7 +33,9 @@ def disconnect(request):
     return JsonResponse({'message': 'disconnect successfully'}, status=200)
 
 def _send_to_connection(connection_id, data):
-    gatewayapi=boto3.client('apigatewaymanagementapi',endpoint_url='https://085rlczqhe.execute-api.us-east-2.amazonaws.com/test',region_name='us-east-2',aws_access_key_id='AKIAJE7DNVOVQJP7CBRQ',aws_secret_access_key='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')
+    gatewayapi=boto3.client('apigatewaymanagementapi',endpoint_url='https://085rlczqhe.execute-api.us-east-2.amazonaws.com/test',
+                            region_name='us-east-2',aws_access_key_id='AKIAJE7DNVOVQJP7CBRQ',
+                            aws_secret_access_key='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')
     return gatewayapi.post_to_connection(ConnectionId=connection_id,Data=json.dumps(data).encode('utf-8'))
 
 @csrf_exempt
@@ -45,10 +47,8 @@ def send_message(request):
     connections = ConnectionModel.objects.all()
     body = [body["message"]]
     data = {'message':body}
-    _send_to_connection(connections[0].connection_id,data)
-    # for cons in connections:
-    #     print(cons.connection_id)
-    #     _send_to_connection(cons.connection_id,data)
+    for cons in connections:
+        _send_to_connection(cons.connection_id,data)
     return JsonResponse({'message': 'successfully sent'}, status=200)
 
 
