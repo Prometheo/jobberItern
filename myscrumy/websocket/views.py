@@ -38,8 +38,10 @@ def _send_to_connection(connection_id, data):
 
 @csrf_exempt
 def send_message(request):
-    body = request.body.decode('utf-8')
+    body = _parse_body(request.body)
     #ChatMessage.objects.create(message=body["message"],username=body["username"],timestamp=body["timestamp"])
+    print(body)
+    print(type(body))
     chatmessage = ChatMessage()
     chatmessage.message = body['message']
     chatmessage.username = body['username']
