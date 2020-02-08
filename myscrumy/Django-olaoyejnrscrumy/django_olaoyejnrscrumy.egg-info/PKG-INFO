@@ -1,0 +1,17 @@
+Metadata-Version: 1.1
+Name: django-olaoyejnrscrumy
+Version: 0.1
+Summary: A simple Django app to monitor team goals.
+Home-page: UNKNOWN
+Author: Popoola Boluwatife
+Author-email: Olaoyejnr@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Enviroment : : Web Enviroment
+Classifier: Framework : : Django
+Classifier: Framework : : Django : : 3.0
+Classifier: Intended Audience : : Developers
+Classifier: License : : OSI Approved : : BSD License
+Classifier: Operating System : : OS Independent
+Classifier: Programming Language : : Python : : 3.6
