@@ -23,7 +23,7 @@ def connect(request):
     ConnectionModel.connection_id = body['connectionId']
     return JsonResponse({'message': 'connect successfully'}, status=200)
 
-
+@csrf_exempt
 def disconnect(request):
     body = _parse_body(request.body)
     trash = body['connectionId']
