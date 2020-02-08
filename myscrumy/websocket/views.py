@@ -23,3 +23,11 @@ def connect(request):
     ConnectionModel.connection_id = body['connectionId']
     return JsonResponse({'message': 'connect successfully'}, status=200)
 
+
+def disconnect(request):
+    body = _parse_body(request.body)
+    trash = body['connectionId']
+    ConnectionModel.objects.get(connection_id = trash).delete()
+    return JsonResponse({'message': 'disconnect successfully'}, status=200)
+
+
