@@ -35,7 +35,7 @@ def _send_to_connection(connection_id, data):
     gatewayapi=boto3.client('apigatewaymanagementapi',endpoint_url=' https://085rlczqhe.execute-api.us-east-2.amazonaws.com/test/',region_name='us-east-2',aws_access_key_id='AKIAJE7DNVOVQJP7CBRQ',aws_secret_access_key='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')
     return gatewayapi.post_to_connection(ConnectionId=connection_id,Data=json.dumps(data).encode('utf-8'))
 
-
+@csrf_exempt
 def send_message(request):
     body = _parse_body(request.body)
     ChatMessage.objects.create(message=body['message'],username=body['username'],timestamp=body['timestamp'])
