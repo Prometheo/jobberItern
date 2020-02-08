@@ -46,7 +46,7 @@ def send_message(request):
     body = [body["message"]]
     data = {'message':body}
     for cons in connections:
-        _send_to_connection(cons,data)
+        _send_to_connection(cons.connection_id,data)
     return JsonResponse({'message': 'successfully sent'}, status=200)
 
 
