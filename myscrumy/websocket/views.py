@@ -6,6 +6,7 @@ import json
 import boto3
 
 
+
 # Create your views here.
 
 @csrf_exempt
@@ -38,9 +39,9 @@ def _send_to_connection(connection_id, data):
 @csrf_exempt
 def send_message(request):
     body = _parse_body(request.body)
-    ChatMessage.objects.create(message=body['message'],username=body['username'],timestamp=body['timestamp'])
+    ChatMessage.objects.create(message=body["message"],username=body["username"],timestamp=body["timestamp"])
     connections = ConnectionModel.objects.all()
-    body = [body['message']]
+    body = [body["message"]]
     data = {'message':body}
     for cons in connections:
         _send_to_connection(cons,data)
