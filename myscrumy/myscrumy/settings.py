@@ -25,12 +25,13 @@ SECRET_KEY = ')ywm#u5^^j+l2r!jkn@9n3x_bz$k7)(b!6&(6jgjtnkwh8iu#5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['3.16.25.2', '127.0.0.1']
+ALLOWED_HOSTS = ['3.19.238.55','3.16.25.2', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'websocket',
     'olaoyejnrscrumy',
     'django.contrib.admin',
     'django.contrib.auth',
