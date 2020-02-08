@@ -20,7 +20,7 @@ def _parse_body(body):
 @csrf_exempt
 def connect(request):
     body = _parse_body(request.body)
-    ConnectionModel.connection_id = body['connectionId']
+    ConnectionModel.objects.create(connection_id = body['connectionId'])
     return JsonResponse({'message': 'connect successfully'}, status=200)
 
 @csrf_exempt
