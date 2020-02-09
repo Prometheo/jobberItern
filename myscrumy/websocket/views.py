@@ -10,15 +10,18 @@ import boto3
 
 # Create your views here.
 
-@csrf_exempt
-def test(request):
-    return JsonResponse({'message': 'hello Daud'}, status=200)
 
 
 def _parse_body(body):
     body_unicode = body.decode('utf-8')
     return json.loads(body_unicode)
 
+
+@csrf_exempt
+def test(request):
+    bodi = (request.body).decode('utf-8')
+    print(bodi)
+    return JsonResponse({'message': 'hello Daud'}, status=200)
 
 @csrf_exempt
 def connect(request):
@@ -43,6 +46,7 @@ def _send_to_connection(connection_id, data):
 def send_message(request):
     body = _parse_body(request.body)
     newbody = dict(body)
+    print(newbody)
     message=newbody['body']["message"]
     username=newbody['body']["username"]
     timestamp=newbody['body']["timestamp"]
