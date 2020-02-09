@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import ConnectionModel, ChatMessage
+from django.forms.models import model_to_dict
 import json
 import boto3
 
@@ -45,11 +46,23 @@ def send_message(request):
     ChatMessage.objects.create(message=body["message"],username=body["username"],timestamp=body["timestamp"])
 
     connections = ConnectionModel.objects.all()
-    body = [body["message"]]
+    body = [body]
     data = {'message':body}
     for cons in connections:
         _send_to_connection(cons.connection_id,data)
     return JsonResponse({'message': 'successfully sent'}, status=200)
 
+@csrf_exempt
+def get_recent_message(request):
+    chatmodel = ChatMessage.objects.all()
+    message_list = []
+    for mods in chatmodel:
+        message_list.append(model_to_dict(mods))
 
+    for dis in message_list:
+        del(dis['id'])
+
+    recent_messages = {'messages':message_list}
+
+    return JsonResponse(recent_messages, status=200)
 
