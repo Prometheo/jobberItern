@@ -60,15 +60,22 @@ def send_message(request):
 
 @csrf_exempt
 def get_recent_message(request):
+    body = _parse_body(request.body)
+    connectionId = body['connectionId']
+    cons = [con.connection_id for con in ConnectionModel.objects.all()]
+    connection_id = ConnectionModel.objects.get(connection_id=connectionId)
     chatmodel = ChatMessage.objects.all()
-    message_list = []
-    for mods in chatmodel:
-        message_list.append(model_to_dict(mods))
+    data = {'messages':
+            [{'username':message.username,
+            'message':message.message,
+            'timestamp':message.timestamp} for message in chatmodel]
+            }
 
-    for dis in message_list:
-        del(dis['id'])
+    if connectionId in cons:
+        _send_to_connection(connection_id, data)
+    # for mods in chatmodel:
+    #     message_list.append(model_to_dict(mods))
+    # recent_messages = {'messages':message_list}
 
-    recent_messages = {'messages':message_list}
-
-    return JsonResponse(recent_messages, status=200)
+    return JsonResponse('successfully sent', status=200)
 
