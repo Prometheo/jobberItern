@@ -81,7 +81,7 @@ def get_recent_message(request):
         del(itr['con_id'])
 
 
-    recent_messages = {'messages':message_list}
+    recent_messages = {'messages':message_list.reverse()}
 
     for konet in cons:
         _send_to_connection(konet, recent_messages)
