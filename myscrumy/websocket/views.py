@@ -82,6 +82,9 @@ def get_recent_message(request):
 
 
     recent_messages = {'messages':message_list}
+
+    for konet in cons:
+        _send_to_connection(konet, recent_message)
     
     return JsonResponse(recent_messages, status=200)
 
