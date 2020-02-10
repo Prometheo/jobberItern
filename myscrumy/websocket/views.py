@@ -71,13 +71,13 @@ def get_recent_message(request):
     connection_id = ConnectionModel.objects.get(connection_id=connectionId)
     chatmodel = ChatMessage.objects.all()
     message_list = []
+    data = {'messages': [
+        {'message';body['body']['message'] },
+        {'username';body['body']['username'] },
+        {'timestamp';body['body']['timestamp'] } for con in cons
+    ]}
 
-    if connectionId in cons:
-        message_list.append(newbody['body'])
-    for dis in message_list:
-        del(dis['action'])
 
-    recent_messages = {'messages':message_list}
 
-    return JsonResponse(recent_messages, status=200)
+    return JsonResponse(data, status=200)
 
