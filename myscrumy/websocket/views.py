@@ -47,13 +47,12 @@ def _send_to_connection(connection_id, data):
 def send_message(request):
     body = _parse_body(request.body)
     newbody = dict(body)
-    print(newbody)
     con_key = newbody['connectionId']
     connection_id = ConnectionModel.objects.get(connection_id = con_key)
     message=newbody['body']["message"]
     username=newbody['body']["username"]
     timestamp=newbody['body']["timestamp"]
-    ChatMessage.objects.create(message=message,username=username,timestamp=timestamp, connection_id = connection_id)
+    ChatMessage.objects.create(message=message,username=username,timestamp=timestamp, con_id = connection_id)
     messages = {
         "username": username,
         "message": message,
