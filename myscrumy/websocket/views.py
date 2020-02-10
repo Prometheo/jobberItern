@@ -71,10 +71,10 @@ def get_recent_message(request):
     connection_id = ConnectionModel.objects.get(connection_id=connectionId)
     chatmodel = ChatMessage.objects.all()
     message_list = []
-    data = {'messages': [
-        [{'message':body['body']['message'] },
-        {'username':body['body']['username'] },
-        {'timestamp':body['body']['timestamp'] }] for con in cons]
+    data = {'messages':
+        [{'message':body['body']['message'],
+        'username':body['body']['username'],
+        'timestamp':body['body']['timestamp']} for con in cons]
     }
 
 
