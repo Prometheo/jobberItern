@@ -68,9 +68,8 @@ def get_recent_message(request):
     newbody = dict(body)
     connectionId = newbody['connectionId']
     connection_id = ConnectionModel.objects.get(connection_id=connectionId)
-    chatmodel = ChatMessage.objects.all()
     data = {'messages': []}
-    _send_to_connection(str(connection_id), data)
+    _send_to_connection(connection_id, data)
     
     return JsonResponse({'message':json.dumps(data)}, status=200)
 
