@@ -36,6 +36,7 @@ def disconnect(request):
     ConnectionModel.objects.get(connection_id = trash).delete()
     return JsonResponse({'message': 'disconnect successfully'}, status=200)
 
+
 def _send_to_connection(connection_id, data):
     gatewayapi=boto3.client('apigatewaymanagementapi',endpoint_url='https://085rlczqhe.execute-api.us-east-2.amazonaws.com/test',
                             region_name='us-east-2',aws_access_key_id='AKIAJE7DNVOVQJP7CBRQ',
@@ -47,10 +48,12 @@ def send_message(request):
     body = _parse_body(request.body)
     newbody = dict(body)
     print(newbody)
+    con_key = newbody['connectionId']
+    connection_id = ConnectionModel.objects.get(connection_id = con_key)
     message=newbody['body']["message"]
     username=newbody['body']["username"]
     timestamp=newbody['body']["timestamp"]
-    ChatMessage.objects.create(message=message,username=username,timestamp=timestamp)
+    ChatMessage.objects.create(message=message,username=username,timestamp=timestamp, connection_id = connection_id)
     messages = {
         "username": username,
         "message": message,
@@ -64,12 +67,22 @@ def send_message(request):
 
 @csrf_exempt
 def get_recent_message(request):
-    body = _parse_body(request.body)
-    newbody = dict(body)
-    connectionId = newbody['connectionId']
-    connection_id = ConnectionModel.objects.get(connection_id=connectionId)
-    data = {'messages': []}
-    _send_to_connection(connection_id, data)
+    #body = _parse_body(request.body)
+    #connectionId = body['connectionId']
+    chats = ChatMessage.objects.all()
+    cons = [con.connection_id for con in ConnectionModel.objects.all()]
+    #connection_id = ConnectionModel.objects.get(connection_id=connectionId)
+    message_list = []
+    for message in chats:
+        if message.con_id.connection_id in cons:
+            message_list.append(model_to_dict(message))
+
+    for itr in message_list:
+        del(itr['id'])
+        del(itr['con_id'])
+
+
+    recent_messages = {'messages':message_list}
     
-    return JsonResponse({'message':json.dumps(data)}, status=200)
+    return JsonResponse(recent_messages, status=200)
 

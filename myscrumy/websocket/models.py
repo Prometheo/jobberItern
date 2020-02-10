@@ -9,3 +9,4 @@ class ChatMessage(models.Model):
     username = models.CharField(max_length=50)
     message = models.CharField(max_length=400)
     timestamp = models.CharField(max_length=100)
+    con_id = models.ForeignKey(ConnectionModel, on_delete = models.PROTECT)
