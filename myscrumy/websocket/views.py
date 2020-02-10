@@ -65,14 +65,15 @@ def send_message(request):
 @csrf_exempt
 def get_recent_message(request):
     body = _parse_body(request.body)
-    connectionId = body['connectionId']
+    newbody = dict(body)
+    connectionId = newbody['connectionId']
     cons = [con.connection_id for con in ConnectionModel.objects.all()]
     connection_id = ConnectionModel.objects.get(connection_id=connectionId)
     chatmodel = ChatMessage.objects.all()
     message_list = []
 
     if connectionId in cons:
-        message_list.append(body['body'])
+        message_list.append(newbody['body'])
     for dis in message_list:
         del(dis['action'])
 
