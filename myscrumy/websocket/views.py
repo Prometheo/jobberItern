@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import ConnectionModel, ChatMessage
 from django.forms.models import model_to_dict
-import json
+import json, os
 import boto3
 
 
@@ -39,8 +39,8 @@ def disconnect(request):
 
 def _send_to_connection(connection_id, data):
     gatewayapi=boto3.client('apigatewaymanagementapi',endpoint_url='https://085rlczqhe.execute-api.us-east-2.amazonaws.com/test',
-                            region_name='us-east-2',aws_access_key_id='AKIAJE7DNVOVQJP7CBRQ',
-                            aws_secret_access_key='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')
+                            region_name='us-east-2',aws_access_key_id= os.environ.get('AWS_ACCESS_KEY'),
+                            aws_secret_access_key= os.environ.get('AWS_SECRET_KEY'))
     return gatewayapi.post_to_connection(ConnectionId=connection_id,Data=json.dumps(data).encode('utf-8'))
 
 @csrf_exempt
